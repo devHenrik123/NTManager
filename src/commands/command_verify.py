@@ -58,7 +58,7 @@ async def step_5_verified(interaction: Interaction) -> None:
         embed=DefaultEmbed(
             title=f"Verification",
             description=(
-                f"{interaction.user.mention} Your accounts has successfully been verified!"
+                f"{interaction.user.mention} Your account has successfully been verified!"
             )
         )
     )
@@ -109,6 +109,9 @@ async def step_3_verify(interaction: Interaction) -> None:
         await step_5_verified(interaction)
     else:
         await step_4_could_not_verify(interaction)
+
+    # Immediately delete the process! The Meta world takes extra time.
+    MetaWorld.delete(process.id)
 
 
 # ====================================================================================================================

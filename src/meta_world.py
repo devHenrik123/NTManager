@@ -33,8 +33,12 @@ class MetaWorld(ABC):
         return MetaWorld._Objects.get(obj_id, None)
 
     @staticmethod
+    def delete(obj_id: str) -> None:
+        del MetaWorld._Objects[obj_id]
+
+    @staticmethod
     async def clean() -> None:
         now: datetime = datetime.now()
         for id_, obj in deepcopy(MetaWorld._Objects).items():
             if obj.destruction_date < now:
-                del MetaWorld._Objects[id_]
+                MetaWorld.delete(id_)
